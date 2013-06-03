@@ -1,3 +1,9 @@
 {
-    "name": "yaft"
+    "name": "yaft",
+    "devDependencies": {
+        "nodeunit": "~0.8.0"
+    },
+    "scripts": {
+        "test": "nodeunit test"
+    }
 }
