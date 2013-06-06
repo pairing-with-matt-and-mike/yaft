@@ -89,6 +89,12 @@ var functions = {
     "apply": function(tokens, stack) {
         tokens.pop();
         evaluate(stack.pop(), stack);
+    },
+    "dup": function(tokens, stack) {
+        tokens.pop();
+        var token = stack.pop();
+        stack.push(token);
+        stack.push(token);
     }
 };
 

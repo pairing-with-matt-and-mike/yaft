@@ -66,3 +66,9 @@ exports["double quote and two applys"] = function(test) {
     test.deepEqual(result.stack, [5]);
     test.done();
 };
+
+exports["dup duplicates top item of stack"] = function(test) {
+    var result = yaft.run("42 dup");
+    test.deepEqual(result.stack, [42, 42]);
+    test.done();
+};
