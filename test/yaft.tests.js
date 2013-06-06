@@ -61,8 +61,8 @@ exports["applied quote of two pluses adds three numbers"] = function(test) {
     test.done();
 };
 
-// exports["double quote and two applys"] = function(test) {
-//     var result = yaft.run("2 3 [ [ + ] ] apply apply");
-//     test.deepEqual(result.stack, [5]);
-//     test.done();
-// };
+exports["double quote and two applys"] = function(test) {
+    var result = yaft.run("2 3 [ [ + ] ] apply apply");
+    test.deepEqual(result.stack, [5]);
+    test.done();
+};
