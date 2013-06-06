@@ -72,3 +72,9 @@ exports["dup duplicates top item of stack"] = function(test) {
     test.deepEqual(result.stack, [42, 42]);
     test.done();
 };
+
+exports["pop removes top item of stack"] = function(test) {
+    var result = yaft.run("42 pop");
+    test.deepEqual(result.stack, []);
+    test.done();
+};

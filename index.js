@@ -95,6 +95,10 @@ var functions = {
         var token = stack.pop();
         stack.push(token);
         stack.push(token);
+    },
+    "pop": function(tokens, stack) {
+        tokens.pop();
+        stack.pop();
     }
 };
 
