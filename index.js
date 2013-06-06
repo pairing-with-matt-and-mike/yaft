@@ -15,6 +15,23 @@ function run(program) {
     };
 }
 
+function repl() {
+    var readline = require('readline');
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    var stack = [];
+    rl.on("line", function(line) {
+        var tokens = tokenise(line);
+        var ast = parse(tokens);
+        evaluate(ast, stack);
+        console.log(stack);
+    }).on('close', function() {
+        process.exit(0);
+    });
+}
+
 function tokenise(program) {
     if (program) {
         var tokens = program.split(/ /);
@@ -74,3 +91,7 @@ var functions = {
         evaluate(stack.pop(), stack);
     }
 };
+
+if (require.main === module) {
+    repl();
+}
