@@ -55,6 +55,12 @@ exports["applied quoted plus adds two numbers"] = function(test) {
     test.done();
 };
 
+exports["applied quote of two pluses adds three numbers"] = function(test) {
+    var result = yaft.run("1 2 3 [ + + ] apply");
+    test.deepEqual(result.stack, [6]);
+    test.done();
+};
+
 // exports["double quote and two applys"] = function(test) {
 //     var result = yaft.run("2 3 [ [ + ] ] apply apply");
 //     test.deepEqual(result.stack, [5]);

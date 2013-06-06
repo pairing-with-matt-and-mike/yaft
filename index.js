@@ -6,7 +6,9 @@ function run(program) {
 
     var tokens = tokenise(program);
 
-    evaluate(tokens, stack);
+    var ast = parse(tokens);
+
+    evaluate(ast, stack);
 
     return {
         stack: stack
@@ -23,13 +25,31 @@ function tokenise(program) {
     }
 }
 
+function parse(tokens) {
+    var ast = [];
+    while (tokens.length) {
+        var token = tokens.pop();
+        if (token === "[") {
+            var quote = parse(tokens);
+            ast.push(quote);
+        } else if ("]" === token) {
+            return ast;
+        } else {
+            ast.push(token);
+        }
+    }
+    ast.reverse();
+    return ast;
+}
+
 function evaluate(tokens, stack) {
     while (tokens.length > 0) {
         var token = tokens[tokens.length - 1];
-        if (functions[token]) {
+        if (Object.prototype.toString.call(token) === '[object Array]') {
+            tokens.pop();
+            stack.push(token);
+        } else if (functions[token]) {
             functions[token](tokens, stack);
-        } else if (token === "[") {
-            quote(tokens, stack);
         } else {
             tokens.pop();
             stack.push(parseInt(token, 10));
@@ -54,15 +74,3 @@ var functions = {
         evaluate(stack.pop(), stack);
     }
 };
-
-function quote(tokens, stack) {
-    tokens.pop();
-    var token;
-    var quoteTokens = [];
-    while ("]" !== (token = tokens.pop())) {
-        quoteTokens.push(token);
-    }
-    stack.push(quoteTokens);
-};
-
-// [ 2 3 + ]
