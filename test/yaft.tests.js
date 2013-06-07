@@ -78,3 +78,9 @@ exports["pop removes top item of stack"] = function(test) {
     test.deepEqual(result.stack, []);
     test.done();
 };
+
+exports["swap swaps the top two items of the stack"] = function(test) {
+    var result = yaft.run("42 1 swap");
+    test.deepEqual(result.stack, [1, 42]);
+    test.done();
+};

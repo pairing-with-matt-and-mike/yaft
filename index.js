@@ -99,6 +99,13 @@ var functions = {
     "pop": function(tokens, stack) {
         tokens.pop();
         stack.pop();
+    },
+    "swap": function(tokens, stack) {
+        tokens.pop();
+        var a = stack.pop();
+        var b = stack.pop();
+        stack.push(a);
+        stack.push(b);
     }
 };
 
