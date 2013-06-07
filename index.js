@@ -106,6 +106,10 @@ var functions = {
         var b = stack.pop();
         stack.push(a);
         stack.push(b);
+    },
+    "clear": function(tokens, stack) {
+        tokens.pop();
+        stack.length = 0;
     }
 };
 

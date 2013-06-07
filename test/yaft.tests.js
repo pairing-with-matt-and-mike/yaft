@@ -84,3 +84,9 @@ exports["swap swaps the top two items of the stack"] = function(test) {
     test.deepEqual(result.stack, [1, 42]);
     test.done();
 };
+
+exports["clear empties the stack"] = function(test) {
+    var result = yaft.run("1 2 3 4 5 6 7 8 9 clear");
+    test.deepEqual(result.stack, []);
+    test.done();
+};
