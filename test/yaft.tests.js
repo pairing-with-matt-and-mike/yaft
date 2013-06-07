@@ -1,35 +1,30 @@
 var yaft = require("../");
 
+function yaftTest(desc, program, expected) {
+    exports[desc] = function(test) {
+        var result = yaft.run(program);
+        test.deepEqual(result.stack, expected);
+        test.done();
+    };
+}
+
 exports["the empty program results in an empty stack"] = function(test) {
     var result = yaft.run("");
     test.equals(result.stack.length, 0);
     test.done();
 };
 
-exports["a single number results in that number on the stack"] = function(test) {
-    var result = yaft.run("42");
-    test.deepEqual(result.stack, [42]);
-    test.done();
-};
+yaftTest("a single number results in that number on the stack",
+         "42", [42]);
 
-exports["a zero results in a zero on the stack"] = function(test) {
-    var result = yaft.run("0");
-    test.deepEqual(result.stack, [0]);
-    test.done();
-};
+yaftTest("a zero results in a zero on the stack",
+        "0", [0]);
 
-exports["two numbers results in those numbers on the stack"] = function(test) {
-    var result = yaft.run("42 47");
-    test.deepEqual(result.stack, [42, 47]);
-    test.done();
-};
+yaftTest("two numbers results in those numbers on the stack",
+         "42 47", [42, 47]);
 
 function opTest(token, expected) {
-    exports[token + " two numbers, result is on stack"] = function(test) {
-        var result = yaft.run("7 42 " + token);
-        test.deepEqual(result.stack, [expected]);
-        test.done();
-    };
+    yaftTest(token + " two numbers, result is on stack", "7 42 " + token, [expected]);
 }
 
 opTest("+", 49);
@@ -37,68 +32,35 @@ opTest("-", 35);
 opTest("*", 294);
 opTest("/", 6);
 
-exports["empty quote puts empty quote on stack"] = function(test) {
-    var result = yaft.run("[ ]");
-    test.deepEqual(result.stack, [[]]);
-    test.done();
-};
+yaftTest("empty quote puts empty quote on stack",
+         "[ ]", [[]]);
 
-exports["apply pops a quote off the stack"] = function(test) {
-    var result = yaft.run("[ ] apply");
-    test.deepEqual(result.stack, []);
-    test.done();
-};
+yaftTest("apply pops a quote off the stack",
+         "[ ] apply", []);
 
-exports["applied quoted plus adds two numbers"] = function(test) {
-    var result = yaft.run("2 3 [ + ] apply");
-    test.deepEqual(result.stack, [5]);
-    test.done();
-};
+yaftTest("applied quoted plus adds two numbers",
+         "2 3 [ + ] apply", [5]);
 
-exports["applied quote of two pluses adds three numbers"] = function(test) {
-    var result = yaft.run("1 2 3 [ + + ] apply");
-    test.deepEqual(result.stack, [6]);
-    test.done();
-};
+yaftTest("applied quote of two pluses adds three numbers",
+         "1 2 3 [ + + ] apply", [6]);
 
-exports["double quote and two applys"] = function(test) {
-    var result = yaft.run("2 3 [ [ + ] ] apply apply");
-    test.deepEqual(result.stack, [5]);
-    test.done();
-};
+yaftTest("double quote and two applys",
+         "2 3 [ [ + ] ] apply apply", [5]);
 
-exports["dup duplicates top item of stack"] = function(test) {
-    var result = yaft.run("42 dup");
-    test.deepEqual(result.stack, [42, 42]);
-    test.done();
-};
+yaftTest("dup duplicates top item of stack",
+         "42 dup", [42, 42]);
 
-exports["pop removes top item of stack"] = function(test) {
-    var result = yaft.run("42 pop");
-    test.deepEqual(result.stack, []);
-    test.done();
-};
+yaftTest("pop removes top item of stack",
+         "42 pop", []);
 
-exports["swap swaps the top two items of the stack"] = function(test) {
-    var result = yaft.run("42 1 swap");
-    test.deepEqual(result.stack, [1, 42]);
-    test.done();
-};
+yaftTest("swap swaps the top two items of the stack",
+         "42 1 swap", [1, 42]);
 
-exports["clear empties the stack"] = function(test) {
-    var result = yaft.run("1 2 3 4 5 6 7 8 9 clear");
-    test.deepEqual(result.stack, []);
-    test.done();
-};
+yaftTest("clear empties the stack",
+         "1 2 3 4 5 6 7 8 9 clear", []);
 
-exports["true results in true on the stack"] = function(test) {
-    var result = yaft.run("true");
-    test.deepEqual(result.stack, [true]);
-    test.done();
-};
+yaftTest("true results in true on the stack",
+         "true", [true]);
 
-exports["false results in false on the stack"] = function(test) {
-    var result = yaft.run("false");
-    test.deepEqual(result.stack, [false]);
-    test.done();
-};
+yaftTest("false results in false on the stack",
+         "false", [false]);
