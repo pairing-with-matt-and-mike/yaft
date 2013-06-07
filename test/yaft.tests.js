@@ -64,3 +64,9 @@ yaftTest("true results in true on the stack",
 
 yaftTest("false results in false on the stack",
          "false", [false]);
+
+yaftTest("if true leaves result of true branch at top of stack",
+         "[ 2 ] [ 1 ] true if", [1]);
+
+yaftTest("if false leaves result of false branch at top of stack",
+         "[ 2 ] [ 1 ] false if", [2]);

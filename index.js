@@ -118,6 +118,13 @@ var functions = {
     "false": function(tokens, stack) {
         tokens.pop();
         stack.push(false);
+    },
+    "if": function(tokens, stack) {
+        tokens.pop();
+        var c = stack.pop();
+        var t = stack.pop();
+        var f = stack.pop();
+        evaluate(c ? t : f, stack);
     }
 };
 
