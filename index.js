@@ -130,6 +130,13 @@ var functions = {
     "quote": function(tokens, stack) {
         tokens.pop();
         stack.push([stack.pop()]);
+    },
+    "dip": function(tokens, stack) {
+        tokens.pop();
+        var q = stack.pop();
+        var t = stack.pop();
+        evaluate(q, stack);
+        stack.push(t);
     }
 };
 
