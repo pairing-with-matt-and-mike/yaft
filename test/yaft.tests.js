@@ -90,3 +90,15 @@ exports["clear empties the stack"] = function(test) {
     test.deepEqual(result.stack, []);
     test.done();
 };
+
+exports["true results in true on the stack"] = function(test) {
+    var result = yaft.run("true");
+    test.deepEqual(result.stack, [true]);
+    test.done();
+};
+
+exports["false results in false on the stack"] = function(test) {
+    var result = yaft.run("false");
+    test.deepEqual(result.stack, [false]);
+    test.done();
+};

@@ -110,6 +110,14 @@ var functions = {
     "clear": function(tokens, stack) {
         tokens.pop();
         stack.length = 0;
+    },
+    "true": function(tokens, stack) {
+        tokens.pop();
+        stack.push(true);
+    },
+    "false": function(tokens, stack) {
+        tokens.pop();
+        stack.push(false);
     }
 };
 
