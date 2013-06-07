@@ -70,3 +70,9 @@ yaftTest("if true leaves result of true branch at top of stack",
 
 yaftTest("if false leaves result of false branch at top of stack",
          "[ 2 ] [ 1 ] false if", [2]);
+
+yaftTest("eq tests for equality, 1 and 1 are equal",
+         "1 1 eq", [true]);
+
+yaftTest("eq tests for equality, 1 and 2 are not equal",
+         "1 2 eq", [false]);
