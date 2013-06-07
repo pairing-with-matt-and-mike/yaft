@@ -76,3 +76,6 @@ yaftTest("eq tests for equality, 1 and 1 are equal",
 
 yaftTest("eq tests for equality, 1 and 2 are not equal",
          "1 2 eq", [false]);
+
+yaftTest("quote lifts top of stack in to a quote",
+         "1 quote", [[1]]);

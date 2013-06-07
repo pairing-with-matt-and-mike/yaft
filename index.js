@@ -126,7 +126,11 @@ var functions = {
         var f = stack.pop();
         evaluate(c ? t : f, stack);
     },
-    "eq": binop(function(a, b) { return a === b; })
+    "eq": binop(function(a, b) { return a === b; }),
+    "quote": function(tokens, stack) {
+        tokens.pop();
+        stack.push([stack.pop()]);
+    }
 };
 
 if (require.main === module) {
