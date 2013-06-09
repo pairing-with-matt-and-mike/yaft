@@ -44,6 +44,9 @@ yaftTest("applied quoted plus adds two numbers",
 yaftTest("applied quote of two pluses adds three numbers",
          "1 2 3 [ + + ] apply", [6]);
 
+yaftTest("in an application of [ + - ] plus happens first",
+         "1 2 3 [ + - ] apply", [4]);
+
 yaftTest("double quote and two applys",
          "2 3 [ [ + ] ] apply apply", [5]);
 
@@ -82,3 +85,9 @@ yaftTest("quote lifts top of stack in to a quote",
 
 yaftTest("dip temporarily removes top of stack, and applies a quote",
          "1 2 [ pop ] dip", [2]);
+
+yaftTest("def creates a new function",
+         "[ + ] f def 1 2 f", [3]);
+
+yaftTest("def creates a reusable function",
+         "[ + ] f def 1 2 3 f f", [6]);

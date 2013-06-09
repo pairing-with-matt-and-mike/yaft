@@ -50,6 +50,7 @@ function parse(tokens) {
             var quote = parse(tokens);
             ast.push(quote);
         } else if ("]" === token) {
+            ast.reverse();
             return ast;
         } else {
             ast.push(token);
@@ -67,9 +68,12 @@ function evaluate(tokens, stack) {
             stack.push(token);
         } else if (functions[token]) {
             functions[token](tokens, stack);
-        } else {
+        } else if (/^\d+$/.test(token)) {
             tokens.pop();
             stack.push(parseInt(token, 10));
+        } else {
+            tokens.pop();
+            stack.push(token);
         }
     }
 }
@@ -137,6 +141,15 @@ var functions = {
         var t = stack.pop();
         evaluate(q, stack);
         stack.push(t);
+    },
+    "def": function(tokens, stack) {
+        tokens.pop();
+        var n = stack.pop();
+        var q = stack.pop();
+        functions[n] = function(ts, s) {
+            ts.pop();
+            evaluate(q.slice(0), s);
+        };
     }
 };
 
