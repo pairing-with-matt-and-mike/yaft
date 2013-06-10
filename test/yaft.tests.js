@@ -24,7 +24,7 @@ yaftTest("two numbers results in those numbers on the stack",
          "42 47", [42, 47]);
 
 function opTest(token, expected) {
-    yaftTest(token + " two numbers, result is on stack", "7 42 " + token, [expected]);
+    yaftTest(token + " two numbers, result is on stack", "42 7 " + token, [expected]);
 }
 
 opTest("+", 49);
@@ -45,7 +45,7 @@ yaftTest("applied quote of two pluses adds three numbers",
          "1 2 3 [ + + ] apply", [6]);
 
 yaftTest("in an application of [ + - ] plus happens first",
-         "1 2 3 [ + - ] apply", [4]);
+         "3 2 1 [ + - ] apply", [0]);
 
 yaftTest("double quote and two applys",
          "2 3 [ [ + ] ] apply apply", [5]);

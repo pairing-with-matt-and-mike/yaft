@@ -86,10 +86,10 @@ function binop(op) {
 };
 
 var functions = {
-    "+": binop(function(a, b) { return a + b; }),
-    "-": binop(function(a, b) { return a - b; }),
-    "*": binop(function(a, b) { return a * b; }),
-    "/": binop(function(a, b) { return a / b; }),
+    "+": binop(function(a, b) { return b + a; }),
+    "-": binop(function(a, b) { return b - a; }),
+    "*": binop(function(a, b) { return b * a; }),
+    "/": binop(function(a, b) { return b / a; }),
     "apply": function(tokens, stack) {
         tokens.pop();
         evaluate(stack.pop(), stack);
