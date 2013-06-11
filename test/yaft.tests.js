@@ -80,6 +80,42 @@ yaftTest("eq tests for equality, 1 and 1 are equal",
 yaftTest("eq tests for equality, 1 and 2 are not equal",
          "1 2 eq", [false]);
 
+yaftTest("1 is less than 2",
+         "1 2 lt", [true]);
+
+yaftTest("2 is not less than 1",
+         "2 1 lt", [false]);
+
+yaftTest("1 is not less than 1",
+         "1 1 lt", [false]);
+
+yaftTest("1 is not greater than 2",
+         "1 2 gt", [false]);
+
+yaftTest("2 is greater than 1",
+         "2 1 gt", [true]);
+
+yaftTest("1 is not greater than 1",
+         "1 1 gt", [false]);
+
+yaftTest("1 is less than or equal to 2",
+         "1 2 leq", [true]);
+
+yaftTest("2 is not less than or equal to 1",
+         "2 1 leq", [false]);
+
+yaftTest("1 is less than or equal to 1",
+         "1 1 leq", [true]);
+
+yaftTest("1 is not greater than or equal to 2",
+         "1 2 geq", [false]);
+
+yaftTest("2 is greater than or equal to 1",
+         "2 1 geq", [true]);
+
+yaftTest("1 is greater than or equal to 1",
+         "1 1 geq", [true]);
+
 yaftTest("quote lifts top of stack in to a quote",
          "1 quote", [[1]]);
 
