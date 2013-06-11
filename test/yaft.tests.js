@@ -8,11 +8,8 @@ function yaftTest(desc, program, expected) {
     };
 }
 
-exports["the empty program results in an empty stack"] = function(test) {
-    var result = yaft.run("");
-    test.equals(result.stack.length, 0);
-    test.done();
-};
+yaftTest("the empty program results in an empty stack",
+         "", []);
 
 yaftTest("a single number results in that number on the stack",
          "42", [42]);
