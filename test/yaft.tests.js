@@ -124,3 +124,6 @@ yaftTest("def creates a new function",
 
 yaftTest("def creates a reusable function",
          "[ + ] f def 1 2 3 f f", [6]);
+
+yaftTest("dup-ed quotes are independent of the original",
+         "1 2 3 [ + ] dup dip apply", [6]);

@@ -96,7 +96,10 @@ var functions = {
     "dup": function(tokens, stack) {
         tokens.pop();
         var token = stack.pop();
-        stack.push(token);
+        var dupe = Object.prototype.toString.call(token) === '[object Array]'
+                ? token.slice(0)
+                : token;
+        stack.push(dupe);
         stack.push(token);
     },
     "pop": function(tokens, stack) {
