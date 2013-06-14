@@ -11,7 +11,7 @@ function run(program) {
 }
 
 function repl() {
-    var readline = require('readline');
+    var readline = require("readline");
     var rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
@@ -22,7 +22,7 @@ function repl() {
         var ast = parse(tokens);
         evaluate(ast, stack);
         console.log(stack);
-    }).on('close', function() {
+    }).on("close", function() {
         process.exit(0);
     });
 }
