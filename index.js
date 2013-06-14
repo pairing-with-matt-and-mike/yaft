@@ -1,15 +1,10 @@
 exports.run = run;
 
 function run(program) {
-
-    var stack = [];
-
     var tokens = tokenise(program);
-
     var ast = parse(tokens);
-
+    var stack = [];
     evaluate(ast, stack);
-
     return {
         stack: stack
     };
