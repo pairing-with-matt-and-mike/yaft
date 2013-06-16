@@ -44,9 +44,21 @@ function parse(tokens) {
         if (token === "[") {
             var quote = parse(tokens);
             ast.push(quote);
-        } else if ("]" === token) {
+        } else if ("]" === token || "}" === token) {
             ast.reverse();
             return ast;
+        } else if (token === "{") {
+            var quote = parse(tokens);
+            if (quote.length === 0) {
+                ast.push({});
+            } else {
+                var key = quote[1];
+                var value = quote[0];
+
+                var obj = {};
+                obj[key] = value;
+                ast.push(obj);
+            }
         } else {
             ast.push(token);
         }

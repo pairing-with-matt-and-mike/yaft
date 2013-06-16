@@ -127,3 +127,12 @@ yaftTest("def creates a reusable function",
 
 yaftTest("dup-ed quotes are independent of the original",
          "1 2 3 [ + ] dup dip apply", [6]);
+
+yaftTest("{ } pushes an empty object on to the stack",
+         "{ }", [{}]);
+
+yaftTest("{ a 1 } pushes the object {a: 1} on to the stack",
+         "{ a 1 }", [{a: 1}]);
+
+yaftTest("{ b [ ] } pushes the object {b: []} on to the stack",
+         "{ b [ ] }", [{b: []}]);
