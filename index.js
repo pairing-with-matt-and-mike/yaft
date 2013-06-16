@@ -85,10 +85,10 @@ var functions = {
     "-": binop(function(a, b) { return b - a; }),
     "*": binop(function(a, b) { return b * a; }),
     "/": binop(function(a, b) { return b / a; }),
-    "lt": binop(function(a, b) { return b < a; }),
-    "gt": binop(function(a, b) { return b > a; }),
-    "leq": binop(function(a, b) { return b <= a; }),
-    "geq": binop(function(a, b) { return b >= a; }),
+    "<": binop(function(a, b) { return b < a; }),
+    ">": binop(function(a, b) { return b > a; }),
+    "<=": binop(function(a, b) { return b <= a; }),
+    ">=": binop(function(a, b) { return b >= a; }),
     "apply": function(tokens, stack) {
         tokens.pop();
         evaluate(stack.pop(), stack);
