@@ -2,7 +2,7 @@ exports.run = run;
 
 function run(program) {
     var tokens = tokenise(program);
-    var ast = parse(tokens);
+    var ast = parse(tokens).ast;
     var stack = [];
     evaluate(ast, stack);
     return {
@@ -29,26 +29,31 @@ function repl() {
 
 function tokenise(program) {
     if (program) {
-        var tokens = program.split(/ /);
-        tokens.reverse();
-        return tokens;
+        return program.split(/ /);
     } else {
         return [];
     }
 }
 
-function parse(tokens) {
+function parse(tokens, index) {
     var ast = [];
-    while (tokens.length) {
-        var token = tokens.pop();
+    index = index || 0;
+    while (index < tokens.length) {
+        var token = tokens[index++];
         if (token === "[") {
-            var quote = parse(tokens);
-            ast.push(quote);
+            var result = parse(tokens, index);
+            ast.push(result.ast);
+            index = result.index;
         } else if ("]" === token || "}" === token) {
             ast.reverse();
-            return ast;
+            return {
+                ast: ast,
+                index: index
+            };
         } else if (token === "{") {
-            var quote = parse(tokens);
+            var result = parse(tokens, index);
+            index = result.index;
+            var quote = result.ast;
             if (quote.length === 0) {
                 ast.push({});
             } else {
@@ -64,7 +69,10 @@ function parse(tokens) {
         }
     }
     ast.reverse();
-    return ast;
+    return {
+        ast: ast,
+        index: index
+    };
 }
 
 function evaluate(tokens, stack) {
