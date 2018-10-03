@@ -19,7 +19,7 @@ function repl() {
     var stack = [];
     rl.on("line", function(line) {
         var tokens = tokenise(line);
-        var ast = parse(tokens);
+        var ast = parse(tokens).ast;
         evaluate(ast, stack);
         console.log(stack);
     }).on("close", function() {
